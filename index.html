@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To My Baby Julie | My Whole Heart In One Place</title>
+    <meta
+      name="description"
+      content="A magical, glowing digital love letter crafted with all my heart for Julie."
+    />
+    <meta name="theme-color" content="#090417" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Great+Vibes&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome 6 Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="loading-locked">
+    <!-- Background Animated Canvases -->
+    <canvas
+      id="ambient-canvas"
+      class="ambient-canvas"
+      aria-hidden="true"
+    ></canvas>
+    <div id="stars-container" class="stars-container" aria-hidden="true"></div>
+    <div
+      id="petals-container"
+      class="petals-container"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Cursor Follower Sparkles (Desktop Only) -->
+    <div id="cursor-glow" class="cursor-glow" aria-hidden="true"></div>
+    <div
+      id="sparkle-container"
+      class="sparkle-container"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Accessibility / Visual Controls Floating Bar -->
+    <aside class="quick-controls" aria-label="Experience controls">
+      <button
+        id="toggle-fx-btn"
+        class="quick-btn"
+        title="Toggle visual floating particles"
+        aria-pressed="true"
+      >
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <span class="tooltip">Particles On/Off</span>
+      </button>
+      <button
+        id="toggle-motion-btn"
+        class="quick-btn"
+        title="Toggle reduced motion mode"
+        aria-pressed="false"
+      >
+        <i class="fa-solid fa-feather"></i>
+        <span class="tooltip">Gentle Motion</span>
+      </button>
+    </aside>
+
+    <!-- Floating Romantic Music Player -->
+    <aside
+      id="music-player-widget"
+      class="music-player glass-panel"
+      aria-label="Romantic background music player"
+    >
+      <div class="player-disc-wrap">
+        <div id="player-disc" class="player-disc" aria-hidden="true">
+          <i class="fa-solid fa-heart disc-heart"></i>
+        </div>
+      </div>
+      <div class="player-info">
+        <span class="player-title">Our Song</span>
+        <span id="player-status" class="player-sub">Click to play</span>
+        <div
+          class="progress-container"
+          id="player-progress-bar"
+          title="Click to seek"
+        >
+          <div id="player-progress-fill" class="progress-fill"></div>
+        </div>
+        <div class="time-display">
+          <span id="player-current-time">0:00</span> /
+          <span id="player-duration">0:00</span>
+        </div>
+      </div>
+      <div class="player-controls">
+        <button
+          id="music-toggle-btn"
+          class="player-btn glow-circle"
+          aria-label="Play or pause music"
+        >
+          <i class="fa-solid fa-play" id="music-icon"></i>
+        </button>
+        <button
+          id="music-mute-btn"
+          class="player-btn mini"
+          aria-label="Mute or unmute music"
+        >
+          <i class="fa-solid fa-volume-high" id="mute-icon"></i>
+        </button>
+        <input
+          type="range"
+          id="volume-slider"
+          class="volume-slider"
+          min="0"
+          max="1"
+          step="0.05"
+          value="0.7"
+          aria-label="Volume slider"
+          title="Volume"
+        />
+      </div>
+    </aside>
+
+    <!-- Audio Element with Local Fallback Synthesis -->
+    <audio id="bg-audio" preload="auto" loop>
+      <source src="music.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- 1. THE ROMANTIC INTRODUCTION (Full-Screen Opening Scene) -->
+    <section
+      id="intro-screen"
+      class="intro-screen active"
+      aria-label="Welcome screen"
+    >
+      <div class="intro-atmosphere">
+        <div class="glowing-orb orb-1"></div>
+        <div class="glowing-orb orb-2"></div>
+        <div class="glowing-orb orb-3"></div>
+      </div>
+
+      <div class="intro-content glass-card glowing-border">
+        <div class="intro-badge">
+          <i class="fa-solid fa-sparkles"></i>
+          <span>Made with all my heart</span>
+          <i class="fa-solid fa-sparkles"></i>
+        </div>
+
+        <div class="intro-heart-anim">
+          <div class="pulsing-heart-aura"></div>
+          <div class="pulsing-heart">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+        </div>
+
+        <h1 class="intro-title">
+          <span class="script-accent">To My Baby Julie,</span>
+          <span class="neon-shine">The Girl Who Makes My World Beautiful</span>
+        </h1>
+
+        <p class="intro-subtitle">
+          I built this little universe just for you, palangga ko. Every glow,
+          every word, and every soft heartbeat in here belongs to you.
+        </p>
+
+        <div class="intro-actions">
+          <button
+            id="open-heart-btn"
+            class="glow-btn primary-btn large pulse-anim"
+          >
+            <span class="btn-shine"></span>
+            <i class="fa-solid fa-envelope-open-heart"></i>
+            <span>Open My Heart</span>
+          </button>
+
+          <button id="skip-intro-btn" class="text-link-btn">
+            <span>Skip to letter</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="intro-note">
+          <i class="fa-solid fa-headphones-simple"></i>
+          <span>Turn on sound for the full romantic experience</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN WEBSITE EXPERIENCE -->
+    <div id="main-experience" class="main-experience hidden">
+      <!-- Romantic Floating Navigation -->
+      <nav class="romantic-nav glass-panel" aria-label="Section navigation">
+        <a href="#envelope-section" class="nav-link active" title="Love Letter"
+          ><i class="fa-solid fa-heart"></i><span>Letter</span></a
+        >
+        <a href="#gallery-section" class="nav-link" title="Our Memories"
+          ><i class="fa-solid fa-images"></i><span>Memories</span></a
+        >
+        <a href="#reasons-section" class="nav-link" title="Little Things"
+          ><i class="fa-solid fa-star"></i><span>Little Things</span></a
+        >
+        <a href="#timeline-section" class="nav-link" title="Our Story"
+          ><i class="fa-solid fa-clock-rotate-left"></i><span>Timeline</span></a
+        >
+        <a href="#question-section" class="nav-link" title="My Heart's Question"
+          ><i class="fa-solid fa-circle-question"></i><span>A Question</span></a
+        >
+        <a href="#secret-section" class="nav-link" title="A Secret"
+          ><i class="fa-solid fa-key"></i><span>Secret</span></a
+        >
+        <a href="#finale-section" class="nav-link" title="Forever"
+          ><i class="fa-solid fa-infinity"></i><span>Forever</span></a
+        >
+      </nav>
+
+      <!-- Header / Banner Section -->
+      <header class="romantic-header">
+        <div class="container text-center">
+          <span class="header-pretitle"
+            ><i class="fa-solid fa-infinity"></i> Always & Forever</span
+          >
+          <h2 class="header-title">
+            My Heart Belongs To You, <span class="highlight-name">Julie</span>
+          </h2>
+          <p class="header-desc">
+            "Every good and perfect gift is from above." — And you, my baby, are
+            the sweetest blessing God has ever placed into my life.
+          </p>
+        </div>
+      </header>
+
+      <!-- 2. THE INTERACTIVE LOVE ENVELOPE -->
+      <section id="envelope-section" class="section envelope-section">
+        <div class="container text-center">
+          <div class="section-tag">
+            <i class="fa-solid fa-envelope"></i>
+            <span>A Special Delivery For Julie</span>
+          </div>
+          <h2 class="section-heading">A Letter Sealed With Love</h2>
+          <p class="section-lead">
+            Tap the glowing heart seal to open your letter, palangga.
+          </p>
+
+          <!-- 3D Realistic Animated Envelope -->
+          <div class="envelope-wrapper">
+            <div
+              id="interactive-envelope"
+              class="envelope-box"
+              role="button"
+              tabindex="0"
+              aria-label="Interactive love envelope. Click to open."
+            >
+              <!-- Flap -->
+              <div class="envelope-flap" id="envelope-flap">
+                <div class="flap-triangle"></div>
+              </div>
+
+              <!-- Envelope Pocket / Back Body -->
+              <div class="envelope-pocket"></div>
+
+              <!-- Wax Seal with Glowing Heart -->
+              <div
+                class="envelope-seal"
+                id="envelope-seal"
+                title="Tap to open the seal"
+              >
+                <div class="seal-glow-ring"></div>
+                <div class="seal-core">
+                  <i class="fa-solid fa-heart"></i>
+                </div>
+              </div>
+
+              <!-- Letter Sliding Out Inside Envelope -->
+              <div class="envelope-paper" id="envelope-paper">
+                <div class="paper-preview">
+                  <div class="paper-stamp">
+                    <i class="fa-solid fa-heart"></i>
+                  </div>
+                  <div class="paper-line script-text">To: My Baby Julie</div>
+                  <div class="paper-line short"></div>
+                  <div class="paper-line"></div>
+                  <div class="paper-line"></div>
+                  <div class="paper-badge">Click to Read</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="envelope-instructions">
+            <button id="read-letter-direct-btn" class="glow-btn primary-btn">
+              <i class="fa-solid fa-book-open-reader"></i>
+              <span>Read Your Letter, Baby</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. THE LONG, HEARTFELT LOVE LETTER (Reading Area) -->
+      <section id="letter-reading-area" class="section letter-reading-area">
+        <div class="container">
+          <div
+            class="letter-parchment glass-card glowing-border"
+            id="letter-card"
+          >
+            <!-- Letter Top Header -->
+            <div class="parchment-decor-top">
+              <span class="decor-corner top-left"
+                ><i class="fa-solid fa-flower"></i
+              ></span>
+              <span class="decor-center-crest">
+                <i class="fa-solid fa-heart-pulse"></i>
+                <em>Julie & Me</em>
+                <i class="fa-solid fa-heart-pulse"></i>
+              </span>
+              <span class="decor-corner top-right"
+                ><i class="fa-solid fa-flower"></i
+              ></span>
+            </div>
+
+            <div class="letter-header">
+              <h3 class="letter-salutation">Palangga ko, my baby Julie,</h3>
+              <p class="letter-date">
+                <i class="fa-regular fa-calendar-heart"></i> Written with all
+                the love my heart can hold
+              </p>
+            </div>
+
+            <!-- Paragraph Container with Progressive Reveal -->
+            <div class="letter-body" id="letter-paragraphs-container">
+              <div class="letter-p active" data-paragraph="1">
+                <span class="drop-cap">B</span>aby, from the very moment you
+                walked into my world, everything began to feel softer, brighter,
+                and infinitely more meaningful. Sometimes I just pause and look
+                at you, or think about your laugh, and my whole chest fills up
+                with a peace I cannot put into ordinary words. You are not just
+                someone I love, Julie; you are the most precious, radiant, and
+                gentle soul I have ever known.
+              </div>
+
+              <div class="letter-p" data-paragraph="2">
+                Every single night when I close my eyes, and every morning when
+                I wake up, I thank God for you. Out of billions of people in
+                this wide world, He guided our steps, wove our stories together,
+                and allowed our paths to cross. I know with all my heart that
+                meeting you was never an accident—it was God’s gracious, tender
+                answered prayer in my life.
+              </div>
+
+              <div class="letter-p" data-paragraph="3">
+                Thank you, my baby, for your sweetness, for your daily care, for
+                the precious time you share with me, and for all the little
+                quiet ways you show you love me. The cute messages you send, the
+                gentle check-ins when you ask how my day went, the warmth in
+                your voice—they brighten my heaviest days.
+                <em>Palangga ta gid ka</em>, more than you will ever completely
+                know.
+              </div>
+
+              <div class="letter-p" data-paragraph="4">
+                Do you know one of my absolute favorite things in this world?
+                It’s hearing you sing praises for God. When you sing, your voice
+                carries so much purity, devotion, and grace. It softens my
+                heart, it calms my mind, and it reminds me how beautiful your
+                faith is. Seeing your genuine love for God makes me admire,
+                honor, and cherish you on an even deeper level. You are truly a
+                woman of God, and I am blessed beyond measure to stand by your
+                side.
+              </div>
+
+              <div class="letter-p" data-paragraph="5">
+                I still smile warmly whenever I remember the moment I met your
+                mother. To be completely honest, baby, I was so shy and nervous
+                that my hands were trembling a little! But inside, that moment
+                meant the entire world to me. It showed me the warm, loving home
+                you grew up in, and it made me want nothing more than to
+                respect, protect, and honor you and the people you hold dear.
+              </div>
+
+              <div class="letter-p" data-paragraph="6">
+                I treasure every single second we have ever spent together. Our
+                dates, our late-night conversations where we lose track of
+                hours, the warmth of holding your gentle hands, our shared
+                jokes, and the quiet comfortable silences where we don't even
+                need words. In your arms, I have found my safest haven, and with
+                you, I can be completely, unapologetically myself.
+              </div>
+
+              <div class="letter-p" data-paragraph="7">
+                I want you to always feel loved, deeply appreciated, respected,
+                safe, and treasured. I never want you to doubt your worth or
+                wonder if you are enough. To me, baby Julie, you are more than
+                enough. You are my dream come true, my comfort, my greatest joy,
+                and the girl I want to keep protecting with everything in me.
+              </div>
+
+              <div class="letter-p" data-paragraph="8">
+                Life will not always be soft sunshine and gentle breezes. There
+                will be busy weeks, hard seasons, misunderstandings, and tired
+                days. But here is what I want you to hold onto: I don't just
+                love you when it is easy; I choose you when it is hard. I choose
+                to listen, I choose to be patient, I choose to hold your hand
+                tighter, and I choose to stand right beside you through every
+                single storm.
+              </div>
+
+              <div class="letter-p" data-paragraph="9">
+                I want us to keep growing together, learning together, praying
+                together, and chasing God's purpose for our lives hand-in-hand.
+                I want to build a lifetime of memories with you—traveling to
+                places we've dreamed of, cooking together, laughing until our
+                stomachs hurt, and holding each other close at the end of long
+                days.
+              </div>
+
+              <div class="letter-p" data-paragraph="10">
+                I won’t make empty fairy-tale guarantees that I cannot keep. But
+                I will make you these sincere, unshakable promises: I promise to
+                love you with honesty and loyalty. I promise to be your biggest
+                cheerleader and your quiet shelter. I promise to pray for you
+                daily, to respect you always, and to never stop looking at you
+                with the same awe and tenderness I feel right now.
+              </div>
+
+              <div class="letter-p" data-paragraph="11">
+                Julie, my baby, I love you with real intention, patient grace,
+                and a loyalty that does not waver. Whatever tomorrow holds, you
+                will never have to face it alone.
+                <em>Paghalong perme, palangga ko</em>. You are my home, my
+                favorite blessing, and the only girl my heart will ever belong
+                to.
+              </div>
+            </div>
+
+            <!-- Letter Reading Controls -->
+            <div class="letter-progress-bar-wrap">
+              <div class="reading-progress-track">
+                <div
+                  id="letter-read-progress"
+                  class="reading-progress-fill"
+                ></div>
+              </div>
+              <span id="reading-counter-text" class="reading-counter"
+                >Part 1 of 11</span
+              >
+            </div>
+
+            <div class="letter-controls">
+              <button id="continue-reading-btn" class="glow-btn secondary-btn">
+                <i class="fa-solid fa-heart-circle-plus"></i>
+                <span>Continue Reading, My Love</span>
+              </button>
+              <button id="read-again-btn" class="glow-btn outline-btn hidden">
+                <i class="fa-solid fa-rotate-left"></i>
+                <span>Read It Again, My Love</span>
+              </button>
+            </div>
+
+            <div class="letter-signature">
+              <p class="sig-closing">Forever & faithfully yours,</p>
+              <p class="sig-name script-accent">Your Love, Always</p>
+              <div class="sig-hearts">
+                <i class="fa-solid fa-heart mini-heart"></i>
+                <i class="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-heart mini-heart"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. OUR MEMORIES PHOTO GALLERY -->
+      <section id="gallery-section" class="section gallery-section">
+        <div class="container">
+          <div class="section-tag">
+            <i class="fa-solid fa-camera-retro"></i>
+            <span>Captured Moments</span>
+          </div>
+          <h2 class="section-heading">Our Beautiful Memories</h2>
+          <p class="section-lead">
+            Every moment spent with you is a photograph my heart holds forever.
+            Click any memory to open it full screen.
+          </p>
+
+          <div class="gallery-grid" id="gallery-grid">
+            <!-- Photo 1 -->
+            <div
+              class="memory-card glass-card glowing-border"
+              data-index="0"
+              data-caption="Your sweetest smile that brightens my whole life. My favorite view in the universe."
+              data-title="Your Radiant Smile"
+            >
+              <div class="photo-frame">
+                <img
+                  src="images/julie1.jpg"
+                  alt="Julie smiling sweetly"
+                  class="gallery-img"
+                  loading="lazy"
+                />
+                <div class="photo-overlay">
+                  <i class="fa-solid fa-magnifying-glass-plus overlay-icon"></i>
+                  <span class="overlay-text">View Memory</span>
+                </div>
+              </div>
+              <div class="photo-caption">
+                <h4>Your Radiant Smile</h4>
+                <p>The gentle smile that stole my heart from day one.</p>
+              </div>
+            </div>
+
+            <!-- Photo 2 -->
+            <div
+              class="memory-card glass-card glowing-border"
+              data-index="1"
+              data-caption="Walking hand-in-hand with you. In your hands, I hold my whole world."
+              data-title="Holding Your Hand"
+            >
+              <div class="photo-frame">
+                <img
+                  src="images/julie2.jpg"
+                  alt="Holding hands together"
+                  class="gallery-img"
+                  loading="lazy"
+                />
+                <div class="photo-overlay">
+                  <i class="fa-solid fa-magnifying-glass-plus overlay-icon"></i>
+                  <span class="overlay-text">View Memory</span>
+                </div>
+              </div>
+              <div class="photo-caption">
+                <h4>Holding Your Hand</h4>
+                <p>Where my hand feels peaceful and right at home.</p>
+              </div>
+            </div>
+
+            <!-- Photo 3 -->
+            <div
+              class="memory-card glass-card glowing-border"
+              data-index="2"
+              data-caption="Hearing you worship and sing for God. Your pure heart and lovely voice inspire me every day."
+              data-title="Singing for God"
+            >
+              <div class="photo-frame">
+                <img
+                  src="images/julie3.jpg"
+                  alt="Julie singing with devotion"
+                  class="gallery-img"
+                  loading="lazy"
+                />
+                <div class="photo-overlay">
+                  <i class="fa-solid fa-magnifying-glass-plus overlay-icon"></i>
+                  <span class="overlay-text">View Memory</span>
+                </div>
+              </div>
+              <div class="photo-caption">
+                <h4>A Heart of Pure Worship</h4>
+                <p>
+                  Your pure devotion to God is the most beautiful thing about
+                  you.
+                </p>
+              </div>
+            </div>
+
+            <!-- Photo 4 -->
+            <div
+              class="memory-card glass-card glowing-border"
+              data-index="3"
+              data-caption="Our quiet dates and endless sweet laughter. The simple days that feel like pure gold."
+              data-title="Our Sweet Dates"
+            >
+              <div class="photo-frame">
+                <img
+                  src="images/julie4.jpg"
+                  alt="Sweet date together"
+                  class="gallery-img"
+                  loading="lazy"
+                />
+                <div class="photo-overlay">
+                  <i class="fa-solid fa-magnifying-glass-plus overlay-icon"></i>
+                  <span class="overlay-text">View Memory</span>
+                </div>
+              </div>
+              <div class="photo-caption">
+                <h4>Sweetest Times Together</h4>
+                <p>
+                  Every second with you is a treasure I hold tight to my chest.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tip for user -->
+          <div class="gallery-tip glass-panel text-center">
+            <i class="fa-solid fa-circle-info"></i>
+            <span
+              >To add or swap photos, save your pictures into the
+              <code>images/</code> folder named <code>julie1.jpg</code>,
+              <code>julie2.jpg</code>, etc.</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- LIGHTBOX MODAL FOR GALLERY -->
+      <div
+        id="gallery-lightbox"
+        class="lightbox-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Photo gallery viewer"
+      >
+        <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+        <div class="lightbox-content glass-card">
+          <button
+            id="lightbox-close-btn"
+            class="lightbox-btn close-btn"
+            aria-label="Close photo view"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+
+          <button
+            id="lightbox-prev-btn"
+            class="lightbox-btn nav-btn prev-btn"
+            aria-label="Previous photo"
+          >
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button
+            id="lightbox-next-btn"
+            class="lightbox-btn nav-btn next-btn"
+            aria-label="Next photo"
+          >
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+
+          <div class="lightbox-image-wrap">
+            <img
+              id="lightbox-img"
+              src=""
+              alt="Enlarged memory view"
+              class="lightbox-img"
+            />
+          </div>
+
+          <div class="lightbox-info">
+            <div class="lightbox-counter" id="lightbox-counter">
+              Photo 1 of 4
+            </div>
+            <h4 id="lightbox-title" class="lightbox-title">Memory Title</h4>
+            <p id="lightbox-caption" class="lightbox-caption">
+              Romantic caption here
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. CLICKABLE LOVE BUTTONS ("Little Things I Want You to Know") -->
+      <section id="reasons-section" class="section reasons-section">
+        <div class="container">
+          <div class="section-tag">
+            <i class="fa-solid fa-sparkles"></i>
+            <span>Whispers From My Soul</span>
+          </div>
+          <h2 class="section-heading">Little Things I Want You to Know</h2>
+          <p class="section-lead">
+            Tap each glowing token below, baby. Every single one carries a piece
+            of my heart that belongs only to you.
+          </p>
+
+          <div class="reasons-grid" id="reasons-grid">
+            <!-- 10 Interactive Buttons -->
+            <button
+              class="reason-btn glass-card glowing-border"
+              data-reason="1"
+            >
+              <span class="reason-icon-wrap"
+                ><i class="fa-solid fa-heart-circle-check"></i
+              ></span>
+              <span class="reason-label">Why I Choose You</span>
+              <i class="fa-solid fa-chevron-right reason-arrow"></i>
+            </button>
+
+            <button
+              class="reason-btn glass-card glowing-border"
+              data-reason="2"
+            >
+              <span class="reason-icon-wrap"
+                ><i class="fa-solid fa-star"></i
+              ></span>
+              <span class="reason-label">You're My Favorite Person</span>
+              <i class="fa-solid fa-chevron-right reason-arrow"></i>
+            </button>
+
+            <button
+              class="reason-btn glass-card glowing-border"
+              data-reason="3"
+            >
+              <span class="reason-icon-wrap"
+                ><i class="fa-solid fa-handshake-angle"></i
+              ></span>
+              <span class="reason-label">A Promise for You</span>
+              <i class="fa-solid fa-chevron-right reason-arrow"></i>
+            </button>
+
+            <button
+              class="reason-btn glass-card glowing-border"
+              data-reason="4"
+            >
+              <span class="reason-icon-wrap"
+                ><i class="fa-solid fa-moon"></i
+              ></span>
+              <span class="reason-label">When You Miss Me</span>
+              <i class="fa-solid fa-chevron-right reason-arrow"></i>
+            </button>
+
+            <button
+              class="reason-btn glass-card glowing-border"
+              data-reason="5"
+            >
+              <span class="reason-icon-wrap"
+                ><i class="fa-solid fa-face-smile-beam"></i
+              ></span>
+              <span class="reason-label">Your Beautiful Smile</span>
+              <i class="fa-solid fa-chevron-right reason-arrow"></i>
+            </button>
+
+            <button
+              class="reason-btn glass-card glowing-border"
+              data-reason="6"
+            >
+              <span class="reason-icon-wrap"
+                ><i class="fa-solid fa-hands-praying"></i
+              ></span>
+              <span class="reason-label">My Prayer for Us</span>
+              <i class="fa-solid fa-chevron-right reason-arrow"></i>
+            </button>
+
+            <button
+              class="reason-btn glass-card glowing-border"
+              data-reason="7"
+            >
+              <span class="reason-icon-wrap"
+                ><i class="fa-solid fa-gem"></i
+              ></span>
+              <span class="reason-label">Things I Adore About You</span>
+              <i class="fa-solid fa-chevron-right reason-arrow"></i>
+            </button>
+
+            <button
+              class="reason-btn glass-card glowing-border"
+              data-reason="8"
+            >
+              <span class="reason-icon-wrap"
+                ><i class="fa-solid fa-compass"></i
+              ></span>
+              <span class="reason-label">Our Future Memories</span>
+              <i class="fa-solid fa-chevron-right reason-arrow"></i>
+            </button>
+
+            <button
+              class="reason-btn glass-card glowing-border"
+              data-reason="9"
+            >
+              <span class="reason-icon-wrap"
+                ><i class="fa-solid fa-cloud-sun-rain"></i
+              ></span>
+              <span class="reason-label">Open When You're Sad</span>
+              <i class="fa-solid fa-chevron-right reason-arrow"></i>
+            </button>
+
+            <button
+              class="reason-btn glass-card glowing-border"
+              data-reason="10"
+            >
+              <span class="reason-icon-wrap"
+                ><i class="fa-solid fa-fire-flame-curved"></i
+              ></span>
+              <span class="reason-label">One More Reason I Love You</span>
+              <i class="fa-solid fa-chevron-right reason-arrow"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- REASON POPUP MODAL -->
+      <div
+        id="reason-modal"
+        class="custom-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="reason-modal-title"
+      >
+        <div class="modal-backdrop" id="reason-backdrop"></div>
+        <div class="modal-card glass-card glowing-border">
+          <button
+            id="reason-close-btn"
+            class="modal-close-btn"
+            aria-label="Close message"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <div class="modal-badge-icon" id="reason-modal-icon">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+          <h3 id="reason-modal-title" class="modal-title">Reason Title</h3>
+          <div class="modal-divider"></div>
+          <p id="reason-modal-body" class="modal-text">
+            Romantic reason text goes here.
+          </p>
+          <div class="modal-footer-tag">
+            <i class="fa-solid fa-heart"></i>
+            <span>Only for you, Baby Julie</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. OUR LOVE TIMELINE -->
+      <section id="timeline-section" class="section timeline-section">
+        <div class="container">
+          <div class="section-tag">
+            <i class="fa-solid fa-route"></i>
+            <span>Our Journey</span>
+          </div>
+          <h2 class="section-heading">The Chapters of Our Story</h2>
+          <p class="section-lead">
+            Every chapter with you is a gift from God. And the best pages are
+            still being written.
+          </p>
+
+          <div class="timeline-container" id="timeline-items-wrap">
+            <!-- Dynamic Timeline items rendered via JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. THE LOVE QUESTION -->
+      <section id="question-section" class="section question-section">
+        <div class="container">
+          <div class="question-card glass-card glowing-border text-center">
+            <div class="question-badge">
+              <i class="fa-solid fa-heart-pulse"></i>
+              <span>Straight From My Heart</span>
+            </div>
+
+            <h3 class="question-title">
+              "Baby Julie, If I Could Choose Again, Would You Still Be My
+              Favorite Hello and My Forever Favorite Person?"
+            </h3>
+
+            <p class="question-sub">
+              Pick with all your heart, my sweet girl...
+            </p>
+
+            <div class="question-buttons-wrap">
+              <button
+                class="glow-btn question-btn primary-btn"
+                data-choice="always"
+              >
+                <i class="fa-solid fa-infinity"></i>
+                <span>Yes, Always & Forever! 💖</span>
+              </button>
+
+              <button
+                class="glow-btn question-btn secondary-btn"
+                data-choice="million"
+              >
+                <i class="fa-solid fa-stars"></i>
+                <span>A Million Times Yes! 🥰</span>
+              </button>
+
+              <button
+                class="glow-btn question-btn outline-btn"
+                data-choice="twice"
+              >
+                <i class="fa-solid fa-sparkle"></i>
+                <span>Can I choose you twice? 😉</span>
+              </button>
+            </div>
+
+            <div id="question-response-box" class="question-response hidden">
+              <div class="response-icon">
+                <i class="fa-solid fa-heart-circle-check"></i>
+              </div>
+              <h4 id="response-title" class="response-title">
+                My Heart is Dancing!
+              </h4>
+              <p id="response-text" class="response-text">
+                Response message...
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. A SECRET LOVE LETTER -->
+      <section id="secret-section" class="section secret-section text-center">
+        <div class="container">
+          <div class="secret-card glass-card glowing-border">
+            <div class="secret-icon-wrap pulse-anim">
+              <i class="fa-solid fa-lock-open"></i>
+            </div>
+            <h3 class="secret-heading">A Hidden Whisper In The Stars</h3>
+            <p class="secret-sub">
+              I tucked away something special just in case you wondered how deep
+              this really goes...
+            </p>
+
+            <button id="secret-btn" class="glow-btn mystery-btn pulse-glow">
+              <span class="btn-shine"></span>
+              <i class="fa-solid fa-key"></i>
+              <span>There's Something More, Baby...</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECRET MODAL -->
+      <div
+        id="secret-modal"
+        class="custom-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="secret-modal-title"
+      >
+        <div class="modal-backdrop" id="secret-backdrop"></div>
+        <div class="modal-card secret-modal-card glass-card glowing-border">
+          <button
+            id="secret-close-btn"
+            class="modal-close-btn"
+            aria-label="Close secret letter"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <div class="modal-badge-icon golden-glow">
+            <i class="fa-solid fa-envelope-open-text"></i>
+          </div>
+          <h3 id="secret-modal-title" class="modal-title">
+            My Secret Letter For Julie
+          </h3>
+          <div class="modal-divider"></div>
+          <div class="secret-letter-text">
+            <p>
+              Baby, if you are reading this, I want you to know the quietest
+              secret my heart holds:
+            </p>
+            <p>
+              Whenever I pray for my future, your smile is the very first thing
+              that comes to my mind. I don’t just love you for who you are
+              today; I love the woman you are becoming in God’s grace. I promise
+              that when you doubt yourself, I will remind you of who you are.
+              When you are tired, I will be your sanctuary.
+            </p>
+            <p>
+              You are my quiet miracle, Julie. In every prayer, in every dream
+              of tomorrow, it has always been you.
+              <em>Palangga gid kaayo tika, subra pa sa mahunahunaan mo.</em>
+            </p>
+          </div>
+          <div class="modal-footer-tag">
+            <i class="fa-solid fa-lock"></i>
+            <span>Sealed in my heart forever</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. A FINAL ROMANTIC SURPRISE -->
+      <footer id="finale-section" class="section finale-section text-center">
+        <div class="container">
+          <div class="finale-card glass-card glowing-border">
+            <div class="flower-garland">
+              <i class="fa-solid fa-seedling"></i>
+              <i class="fa-solid fa-heart"></i>
+              <i class="fa-solid fa-flower"></i>
+              <i class="fa-solid fa-heart"></i>
+              <i class="fa-solid fa-seedling"></i>
+            </div>
+
+            <span class="finale-tag">My Eternal Commitment</span>
+
+            <h2 class="finale-quote">
+              "If God allows me to keep writing our story, baby, I hope there
+              will be countless more pages with your name in them. I don't just
+              want beautiful moments with you. I want to keep showing up,
+              learning how to love you better, and choosing you through the
+              ordinary days, too. I love you, my baby Julie."
+            </h2>
+
+            <div class="finale-sig">
+              <span class="script-accent"
+                >— Always yours, with every beat of my heart.</span
+              >
+            </div>
+
+            <div class="finale-action">
+              <button
+                id="last-surprise-btn"
+                class="glow-btn grand-btn pulse-glow"
+              >
+                <span class="btn-shine"></span>
+                <i class="fa-solid fa-gift"></i>
+                <span>One Last Surprise</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="site-copyright">
+            <p>
+              Handcrafted with boundless love for <strong>Julie</strong> &bull;
+              Forever & Ever
+            </p>
+          </div>
+        </div>
+      </footer>
+
+      <!-- FINAL SURPRISE CELEBRATION MODAL -->
+      <div
+        id="surprise-modal"
+        class="custom-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="surprise-modal-title"
+      >
+        <div class="modal-backdrop" id="surprise-backdrop"></div>
+        <div
+          class="modal-card surprise-modal-card glass-card glowing-border text-center"
+        >
+          <button
+            id="surprise-close-btn"
+            class="modal-close-btn"
+            aria-label="Close surprise"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+
+          <div class="grand-heart-icon">
+            <i class="fa-solid fa-heart-pulse"></i>
+          </div>
+
+          <h3 id="surprise-modal-title" class="surprise-title">
+            You Are My Forever Choice, Julie!
+          </h3>
+
+          <div class="surprise-message">
+            <p>
+              No matter how many days pass, no matter how many sunsets we watch,
+              my choice will always remain the same:
+              <strong>It’s you, baby Julie.</strong>
+            </p>
+            <p class="highlight-quote">
+              "May the Lord bless you and keep you; the Lord make His face shine
+              on you and be gracious to you."
+            </p>
+            <p>
+              Thank you for being my peace, my partner in prayer, and the love
+              of my lifetime. <em>Palangga ta gid ka, baby ko.</em>
+            </p>
+          </div>
+
+          <div class="surprise-action">
+            <button id="celebrate-again-btn" class="glow-btn primary-btn">
+              <i class="fa-solid fa-sparkles"></i>
+              <span>Send Love Back to Heaven 💖</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#main-experience -->
+
+    <!-- Toast Notification element for audio fallback and messages -->
+    <div
+      id="toast-notify"
+      class="toast-notify"
+      role="alert"
+      aria-live="polite"
+    ></div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
